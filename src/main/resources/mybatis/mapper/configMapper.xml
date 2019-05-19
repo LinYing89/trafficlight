@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.zhibo.trafficlight.mapper.ConfigMapper">
+
+    <resultMap type="config" id="configMap">
+        <result column="current_warn_value" property="currentWarnValue" />
+    </resultMap>
+    
+    <update id="updateCurrentWarnValue">
+        update config set
+        current_warn_value = #{value}
+        where id = #{id}
+    </update>
+    
+    <update id="update">
+        update config set
+        current_warn_value = #{currentWarnValue}
+        where id = #{id}
+    </update>
+    
+    <select id="findById" resultMap="configMap">
+        select * from config
+        where
+        id = #{id}
+    </select>
+</mapper>

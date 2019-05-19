@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.zhibo.trafficlight.mapper.CollectorMapper">
+
+    <resultMap type="collector" id="collectorMap">
+        <result column="bus_code" property="busCode" />
+        <result column="begin_address" property="beginAddress" />
+        <result column="data_length" property="dataLength" />
+        <result column="data_type" property="dataTypeEnum" />
+        <result column="msg_manager_id" property="msgManagerId" />
+    </resultMap>
+
+    <insert id="insert" parameterType="collector"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into collector (
+        bus_code, code, begin_address, data_length, data_type, msg_manager_id
+        )
+        values (
+        #{busCode}, #{code}, #{beginAddress}, #{dataLength}, #{dataTypeEnum}, #{msgManagerId}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        delete from collector where id = #{id}
+    </delete>
+
+    <update id="update">
+        update collector set
+        bus_code = #{busCode}, code = #{code}, begin_address = #{beginAddress}, data_length = #{dataLength},
+        data_type = #{dataTypeEnum}
+        where id = #{id}
+    </update>
+
+    <select id="findByMsgManagerId" resultMap="collectorMap">
+        select * from collector where msg_manager_id = #{msgManagerId}
+    </select>
+    
+    <select id="findById" resultMap="collectorMap">
+        select * from collector
+        where
+        id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.zhibo.trafficlight.mapper.MsgManagerMapper">
+
+	<resultMap type="msgManager" id="msgManagerMap">
+		<result column="details_address_id" property="detailsAddressId" />
+	</resultMap>
+
+	<insert id="insert" parameterType="msgManager"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into msg_manager (
+		code,
+		details_address_id
+		)
+		values (
+		#{code}, #{detailsAddressId}
+		)
+	</insert>
+
+	<delete id="deleteById">
+		delete from msg_manager where id = #{id}
+	</delete>
+
+	<update id="updateMsgManagerCode">
+		update msg_manager set
+		code = #{code}
+		where id = #{id}
+	</update>
+
+	<select id="findAll" resultMap="msgManagerMap">
+		select * from msg_manager
+	</select>
+
+	<select id="findByDetailsAddressId" resultMap="msgManagerMap">
+		select * from msg_manager where details_address_id = #{detailsAddressId}
+	</select>
+	<select id="findById" resultMap="msgManagerMap">
+		select * from msg_manager
+		where
+		id = #{id}
+	</select>
+	<select id="findByCode" resultMap="msgManagerMap">
+		select * from msg_manager
+		where
+		code = #{code}
+	</select>
+</mapper>

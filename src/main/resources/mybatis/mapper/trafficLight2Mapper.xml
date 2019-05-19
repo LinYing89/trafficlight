@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.zhibo.trafficlight.mapper.TrafficLightMapper2">
+
+    <resultMap type="trafficLight2" id="trafficLight2Map">
+        <result column="details_address_id" property="detailsAddressId" />
+        <result column="sort_index" property="sortIndex" />
+    </resultMap>
+
+    <insert id="insert" parameterType="direction2"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into traffic_light2 (
+        name, sort_index,
+        details_address_id
+        )
+        values (
+        #{name}, #{sortIndex}, #{detailsAddressId}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        delete from traffic_light2 where id = #{id}
+    </delete>
+
+    <update id="update">
+        update traffic_light2 set
+        name = #{name},
+        sort_index = #{sortIndex}
+        where id = #{id}
+    </update>
+
+    <select id="findByDetailsAddressId" resultMap="trafficLight2Map">
+        select * from traffic_light2 where details_address_id = #{detailsAddressId}
+    </select>
+    <select id="findById" resultMap="trafficLight2Map">
+        select * from traffic_light2
+        where
+        id = #{id}
+    </select>
+</mapper>

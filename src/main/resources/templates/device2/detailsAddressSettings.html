@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 传值 -->
+<!-- detailsAddress : DetailsAddress-->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.css" />
+
+<title>信息地址设置</title>
+
+</head>
+
+<body>
+	<nav
+		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">交通信号灯系统</a>
+	</nav>
+
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-12">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>地址:</td>
+							<td>
+								<div class="row">
+									<a id="a-details-address-id" class="col-auto mr-auto"
+										th:attr="data-details-address-id=${detailsAddress.id}"
+										href="#" th:href="|/data/${detailsAddress.districtId}|"
+										th:text="${areaName}"></a> <a href="#" data-toggle="modal"
+										data-target="#editDetailsAddressModal"
+										th:attr="data-details-address=${detailsAddress.detailsAddress}">编辑地址</a>
+									<a id="del-details-address" class="ml-1"
+										th:href="|/del/detailsAddress/${detailsAddress.id}|">删除地址</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2">
+				<nav class="nav flex-column">
+					<a class="nav-link active" href="#">通信机</a> <a class="nav-link"
+						href="#"
+						th:href="|/detailsAddress/tableStruct/${detailsAddress.id}|">表结构</a>
+					<a class="nav-link" href="#">表内容</a>
+				</nav>
+			</div>
+			<div class="col-10">
+				<div class="col-12 card shadow-sm pl-0 pr-0">
+					<div class="card-header pl-1 pt-1 pb-1">
+						<div class="row">
+							<div class="col-auto mr-auto">
+								<span class="col-auto mr-auto">通信管理机列表</span>
+							</div>
+							<div>
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-option="add"
+									th:attr="data-details-address-id=${detailsAddress.id}"
+									data-target="#editMsgManagerModal">添加通信管理机</button>
+							</div>
+						</div>
+					</div>
+					<table class="table mb-1">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="tbody-msgmanager" th:fragment="tbody-msgmanager">
+							<tr th:each="msgManager : ${msgManagers}">
+								<td th:text="${msgManager.code}">编号</td>
+								<td><a href="#" data-toggle="modal"
+									data-target="#editMsgManagerModal" data-option="edit"
+									th:attr="data-id=${msgManager.id}, data-code=${msgManager.code}">编辑
+								</a><a class="del-msg-manager" href="#"
+									th:href="|/del/msgManager/${msgManager.id}|">删除</a> <a href="#"
+									th:href="|/msgManager/${msgManager.id}|">采集终端</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal 编辑地址 -->
+	<div class="modal fade" id="editDetailsAddressModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">编辑地址</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="form-edit-details-address"
+						th:action="|/edit/detailsAddress/${detailsAddressId}|"
+						method="post">
+						<div class="form-group">
+							<label>详细地址</label> <input type="text" class="form-control"
+								id="label-details-address" name="detailsAddress"
+								required="required" th:value="${detailsAddress.detailsAddress}">
+						</div>
+						<button type="submit" class="btn btn-primary">提交</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal 添加通信机 -->
+	<div class="modal fade" id="editMsgManagerModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editMsgManagerModalTitle">添加通信机</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="form-edit-msgmanager"
+						th:action="|/add/msgManager/${detailsAddress.id}|" method="post">
+						<div class="form-group">
+							<label>通信管理机编号</label> <input type="text" class="form-control"
+								id="manager-code" name="msgManagerCode" required="required">
+						</div>
+						<div class="form-group">
+							<span id="manager-code-repeated" class="text-danger"></span>
+						</div>
+						<button type="submit" class="btn btn-primary">提交</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="/webjars/jquery/3.3.1/jquery.js"></script>
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/umd/popper.js"></script>
+	<script src="/webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
+
+	<script type="text/javascript" src="/js/device/detailsAddress.js"></script>
+</body>
+</html>

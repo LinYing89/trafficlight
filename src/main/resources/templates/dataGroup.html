@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="dataGroup">
+
+		<table class="table table-sm mb-1">
+			<thead>
+				<tr>
+					<th>方向</th>
+					<th>红灯</th>
+					<th>黄灯</th>
+					<th>绿灯</th>
+					<th>人行红灯</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr th:object="${dataGroup.southNorthDirection}">
+                    <td>北方向直行</td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{redLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{redLight.current}"
+                                    th:classappend="${dataGroup.southNorthDirection.redLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{yellowLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{yellowLight.current}"
+                                    th:classappend="${dataGroup.southNorthDirection.yellowLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{greenLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{greenLight.current}"
+                                    th:classappend="${dataGroup.southNorthDirection.greenLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{pedestrianLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{pedestrianLight.current}"
+                                    th:classappend="${dataGroup.southNorthDirection.pedestrianLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:object="${dataGroup.northSouthDirection}">
+                    <td>南方向直行</td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{redLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{redLight.current}"
+                                    th:classappend="${dataGroup.northSouthDirection.redLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{yellowLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{yellowLight.current}"
+                                    th:classappend="${dataGroup.northSouthDirection.yellowLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{greenLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{greenLight.current}"
+                                    th:classappend="${dataGroup.northSouthDirection.greenLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{pedestrianLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{pedestrianLight.current}"
+                                    th:classappend="${dataGroup.northSouthDirection.pedestrianLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+				<tr th:object="${dataGroup.eastWestDirection}">
+					<td>西方向直行</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state"
+								th:classappend="*{redLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span th:text="*{redLight.current}"
+									th:classappend="${dataGroup.eastWestDirection.redLight.current>currentWarnValue}? 'text-danger' : 'text-dark'">10</span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state" th:classappend="*{yellowLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span
+									th:text="*{yellowLight.current}"
+									th:classappend="${dataGroup.eastWestDirection.yellowLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state" th:classappend="*{greenLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span
+									th:text="*{greenLight.current}"
+									th:classappend="${dataGroup.eastWestDirection.greenLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{pedestrianLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{pedestrianLight.current}"
+                                    th:classappend="${dataGroup.eastWestDirection.pedestrianLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+				</tr>
+				<tr th:object="${dataGroup.westEastDirection}">
+					<td>东方向直行</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state" th:classappend="*{redLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span th:text="*{redLight.current}"
+								th:classappend="${dataGroup.westEastDirection.redLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state" th:classappend="*{yellowLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span
+									th:text="*{yellowLight.current}"
+									th:classappend="${dataGroup.westEastDirection.yellowLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+						<div class="row align-items-center">
+							<div class="div-light-state" th:classappend="*{greenLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+							<div class="pl-1">
+								<span
+									th:text="*{greenLight.current}"
+									th:classappend="${dataGroup.westEastDirection.greenLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+								<sub class="text-muted">mA</sub>
+							</div>
+						</div>
+					</td>
+					<td align="center">
+                        <div class="row align-items-center">
+                            <div class="div-light-state" th:classappend="*{pedestrianLight.state==0}? 'bg-success' : 'bg-darger'"></div>
+                            <div class="pl-1">
+                                <span
+                                    th:text="*{pedestrianLight.current}"
+                                    th:classappend="${dataGroup.westEastDirection.pedestrianLight.current>currentWarnValue}? 'text-danger' : 'text-dark'"></span>
+                                <sub class="text-muted">mA</sub>
+                            </div>
+                        </div>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

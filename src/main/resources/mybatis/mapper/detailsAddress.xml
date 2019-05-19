@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.zhibo.trafficlight.mapper.DetailsAddressMapper">
+
+    <resultMap type="detailsAddress" id="detailsAddressMap">
+        <result column="district_id" property="districtId" />
+        <result column="details_address" property="detailsAddress" />
+    </resultMap>
+
+    <insert id="insert" parameterType="detailsAddress"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into details_address (
+        district_id, details_address, longitude, latitude
+        )
+        values (
+        #{districtId}, #{detailsAddress}, #{longitude}, #{latitude}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        delete from details_address where id = #{id}
+    </delete>
+
+    <update id="updateDetailsAddressById">
+        update details_address set
+        details_address = #{detailsAddress}
+        where id = #{id}
+    </update>
+
+    <select id="findById" resultMap="detailsAddressMap">
+        select * from details_address
+        where
+        id = #{id}
+    </select>
+    
+    <select id="findByDistrictId" resultMap="detailsAddressMap">
+        select * from details_address
+        where
+        district_id = #{districtId}
+    </select>
+    
+    <select id="findAll" resultMap="detailsAddressMap">
+        select * from details_address
+    </select>
+</mapper>

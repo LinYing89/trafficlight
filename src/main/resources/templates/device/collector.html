@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 传值 -->
+<!-- collector : Collector-->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.css" />
+
+<title>采集终端设置</title>
+
+</head>
+
+<body>
+	<nav
+		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">交通信号灯系统</a>
+	</nav>
+
+	<div class="container mt-5">
+		<div class="row">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>地址:</td>
+						<td><a href="#"
+							th:href="|/data/${collector.msgManager.detailsAddress.districtId}|"
+							th:text="${areaName}"></a></td>
+					</tr>
+					<tr>
+						<td>通信机编号:</td>
+						<td><a href="#"
+							th:href="|/detailsAddress/${collector.msgManager.detailsAddressId}|"
+							th:text="${collector.msgManager.code}"></a></td>
+					</tr>
+					<tr>
+                        <td>采集终端:</td>
+                        <td><a href="#"
+                            th:href="|/msgManager/${collector.msgManager.id}|"
+                            th:text="|编号:${collector.code}|"></a></td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-12 card shadow-sm pl-0 pr-0">
+				<div class="card-header pl-1 pt-1 pb-1">
+					<div class="row">
+						<div class="col-auto mr-auto">
+							<span class="col-auto mr-auto">线路列表</span>
+						</div>
+						<div>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-option="add" th:attr="data-collector-id=${collector.id}"
+								data-target="#editCircuitModal">添加线路</button>
+						</div>
+					</div>
+				</div>
+				<table class="table mb-1">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>信号灯颜色</th>
+							<th>方向</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="circuit : ${collector.circuits}">
+							<td th:text="${circuit.number}">线路编号</td>
+							<td th:text="${circuit.lightEnum.info}">信号灯颜色</td>
+							<td th:text="${circuit.directionEnum.info}">方向</td>
+							<td><a class="del-circuit" href="#" th:href="|/del/circuit/${circuit.id}|">删除</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Modal 添加线路 -->
+	<div class="modal fade" id="editCircuitModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editCircuitModalTitle">添加线路</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/add/circuit}" method="post"
+						id="form-add-circuit">
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">线路编号</label> <input
+								type="text" class="form-control col-sm-9" name="number"
+								id="form-number" required="required">
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">信号灯颜色</label> <select
+								class="form-control col-sm-9" name="lightEnum" id="form-light"
+								required="required">
+								<option value="RED">红</option>
+								<option value="YELLOW">黄</option>
+								<option value="GREEN">绿</option>
+								<option value="PEDESTRIAN">人行红灯</option>
+							</select>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label">方向</label> <select
+								class="form-control col-sm-9" name="directionEnum"
+								id="form-direction" required="required">
+								<option value="EAST_WEST">东向西</option>
+								<option value="WEST_EAST">西向东</option>
+								<option value="SOUTH_NORTH">南向北</option>
+								<option value="NORTH_SOUTH">北向南</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">提交</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/webjars/jquery/3.3.1/jquery.js"></script>
+	<script src="/webjars/popper.js/1.14.3/umd/popper.js"></script>
+	<script src="/webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
+
+	<script type="text/javascript" src="/js/device/collector.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.zhibo.trafficlight.mapper.CircuitMapper">
+
+    <resultMap type="circuit" id="circuitMap">
+        <result column="collector_id" property="collectorId" />
+        <result column="light" property="lightEnum" />
+        <result column="direction" property="directionEnum" />
+    </resultMap>
+
+    <insert id="insert" parameterType="circuit"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into circuit (
+        number, light, direction, collector_id
+        )
+        values (
+        #{number}, #{lightEnum}, #{directionEnum}, #{collectorId}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        delete from circuit where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="circuit">
+        update circuit set
+        number = #{number}, light = #{lightEnum}, direction = #{"directionEnum"}
+        where id = #{id}
+    </update>
+
+    <select id="findByCollectorId" resultMap="circuitMap">
+        select * from circuit where collector_id = #{collectorId}
+    </select>
+    
+    <select id="findById" resultMap="circuitMap">
+        select * from circuit
+        where
+        id = #{id}
+    </select>
+</mapper>
